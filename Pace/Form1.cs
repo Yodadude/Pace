@@ -344,7 +344,7 @@ namespace Pace
                 }
 
             }
-            catch (System.Exception err)
+            catch (Exception err)
             {
                 MessageBox.Show(err.Message, "Error writting to Registry");
             }
@@ -357,249 +357,6 @@ namespace Pace
 
         }
 
-        private void buttonRetrieve_Click(object sender, EventArgs e)
-        {
-            int i;
-            String connectionString;
-            connectionString = "DSN=" + comboBoxDSN.SelectedItem.ToString() + ";uid=" + textBoxUserID.Text + ";pwd=" + textBoxPassword.Text;
-
-            this.dataGridView1.Rows.Clear();
-
-            try
-            {
-                OdbcConnection conn = new OdbcConnection(connectionString);
-                OdbcCommand cmd = new OdbcCommand();
-                cmd.CommandText = "select dbtype,dbms,dsn,userid,pwd,dbparm,connectsettings,auto_emailing,auto_scheduling,timeout_limit,auto_scheduler_exe,default_sender from impexp_admin_dbs";
-                cmd.Connection = conn;
-                conn.Open();
-                OdbcDataReader data = cmd.ExecuteReader();
-
-                while (data.Read())
-                {
-
-                    i = this.dataGridView1.Rows.Add();
-                    this.dataGridView1["dbtype", i].Value = data.GetString(0);
-                    this.dataGridView1["dbms", i].Value = data.GetString(1);
-                    this.dataGridView1["dsn", i].Value = data.GetString(2);
-                    this.dataGridView1["userid", i].Value = data.GetString(3);
-                    this.dataGridView1["password", i].Value = data.GetString(4);
-                    if (!data.IsDBNull(5))
-                        this.dataGridView1["dbparm", i].Value = data.GetString(5);
-
-                    this.dataGridView1["connectsettings", i].Value = data.GetString(6);
-                    this.dataGridView1["auto_emailing", i].Value = data.GetString(7);
-                    this.dataGridView1["auto_scheduling", i].Value = data.GetString(8);
-                    this.dataGridView1["timeout_limit", i].Value = data.GetInt32(9);
-                    if (!data.IsDBNull(10))
-                        this.dataGridView1["auto_scheduler_exe", i].Value = data.GetString(10);
-                    if (!data.IsDBNull(11))
-                        this.dataGridView1["default_sender", i].Value = data.GetString(11);
-                }
-                data.Close();
-                conn.Close();
-            }
-            catch (SystemException err)
-            {
-                MessageBox.Show(err.Message, this.Text);
-            }
-        }
-
-        private Boolean validateConnectionData()
-        {
-            // validate data for all rows
-            int i;
-            Boolean b_errors = false;
-
-            for (i = 0; i < this.dataGridView1.RowCount; i++)
-            {
-                if (this.dataGridView1.Rows[i].Cells["dsn"].Value == null)
-                {
-                    MessageBox.Show("ODBC DSN not specified.", this.Text);
-                    b_errors = true;
-                    break;
-                }
-                if (this.dataGridView1.Rows[i].Cells["userid"].Value == null)
-                {
-                    MessageBox.Show("User ID is not specified.", this.Text);
-                    b_errors = true;
-                    break;
-                }
-                if (this.dataGridView1.Rows[i].Cells["password"].Value == null)
-                {
-                    MessageBox.Show("Password not specified.", this.Text);
-                    b_errors = true;
-                    break;
-                }
-                if (this.dataGridView1.Rows[i].Cells["timeout_limit"].Value == null)
-                {
-                    MessageBox.Show("Timeout Limit not specified.", this.Text);
-                    b_errors = true;
-                    break;
-                }
-            }
-
-            return b_errors;
-
-        }
-
-        private void buttonSaveDB_Click(object sender, EventArgs e)
-        {
-            if (this.dataGridView1.RowCount == 0) return;
-            if (validateConnectionData()) return;
-
-            int i;
-            String connectionString;
-            connectionString = "DSN=" + comboBoxDSN.SelectedItem.ToString() + ";uid=" + textBoxUserID.Text + ";pwd=" + textBoxPassword.Text;
-
-            OdbcConnection conn = new OdbcConnection(connectionString);
-            OdbcTransaction transaction = null;
-            OdbcCommand cmd = new OdbcCommand();
-            cmd.Connection = conn;
-
-            try
-            {
-                conn.Open();
-                transaction = conn.BeginTransaction();
-                cmd.Transaction = transaction;
-                cmd.CommandText = "delete from impexp_admin_dbs";
-                cmd.ExecuteNonQuery();
-                cmd.Transaction = transaction;
-                cmd.Parameters.Clear();
-                cmd.CommandText = "insert into impexp_admin_dbs " +
-                                  "(dbtype,dbms,dsn,userid,pwd,dbparm,connectsettings,auto_emailing,auto_scheduling,timeout_limit,auto_scheduler_exe,default_sender)" +
-                                  " values(?,?,?,?,?,?,?,?,?,?,?,?)";
-                cmd.Parameters.Add("@dbtype", OdbcType.VarChar, 20);
-                cmd.Parameters.Add("@dbms", OdbcType.VarChar, 20);
-                cmd.Parameters.Add("@dsn", OdbcType.VarChar, 100);
-                cmd.Parameters.Add("@userid", OdbcType.VarChar, 40);
-                cmd.Parameters.Add("@pwd", OdbcType.VarChar, 40);
-                cmd.Parameters.Add("@dbparm", OdbcType.VarChar, 255);
-                cmd.Parameters.Add("@csett", OdbcType.VarChar, 255);
-                cmd.Parameters.Add("@emailer", OdbcType.VarChar, 1);
-                cmd.Parameters.Add("@scheduler", OdbcType.VarChar, 1);
-                cmd.Parameters.Add("@timeout", OdbcType.Int, 0);
-                cmd.Parameters.Add("@exe_path", OdbcType.VarChar, 255);
-                cmd.Parameters.Add("@default_sender", OdbcType.VarChar, 255);
-
-
-                for (i = 0; i < this.dataGridView1.RowCount; i++)
-                {
-                    cmd.Parameters["@dbtype"].Value = this.dataGridView1["dbtype", i].Value.ToString();
-                    cmd.Parameters["@dbms"].Value = this.dataGridView1["dbms", i].Value.ToString();
-                    cmd.Parameters["@dsn"].Value = this.dataGridView1["dsn", i].Value.ToString();
-                    cmd.Parameters["@userid"].Value = this.dataGridView1["userid", i].Value.ToString();
-                    cmd.Parameters["@pwd"].Value = this.dataGridView1["password", i].Value.ToString();
-
-                    if (this.dataGridView1["dbparm", i].Value == null)
-                        cmd.Parameters["@dbparm"].Value = Convert.DBNull;
-                    else
-                        cmd.Parameters["@dbparm"].Value = this.dataGridView1["dbparm", i].Value.ToString();
-
-                    cmd.Parameters["@csett"].Value = this.dataGridView1["connectsettings", i].Value.ToString();
-                    cmd.Parameters["@emailer"].Value = this.dataGridView1["auto_emailing", i].Value;
-                    cmd.Parameters["@scheduler"].Value = this.dataGridView1["auto_scheduling", i].Value;
-                    cmd.Parameters["@timeout"].Value = this.dataGridView1["timeout_limit", i].Value;
-
-                    if (this.dataGridView1["auto_scheduler_exe", i].Value == null)
-                        cmd.Parameters["@exe_path"].Value = Convert.DBNull;
-                    else
-                        cmd.Parameters["@exe_path"].Value = this.dataGridView1["auto_scheduler_exe", i].Value.ToString();
-
-                    if (this.dataGridView1["default_sender", i].Value == null)
-                        cmd.Parameters["@default_sender"].Value = Convert.DBNull;
-                    else
-                        cmd.Parameters["@default_sender"].Value = this.dataGridView1["default_sender", i].Value;
-
-                    cmd.ExecuteNonQuery();
-                }
-
-                transaction.Commit();
-
-                this.toolStripStatusLabel1.Text = "Connection settings successfully saved.";
-            }
-            catch (System.Exception e1)
-            {
-                MessageBox.Show(e1.Message, this.Text);
-                try
-                {
-                    transaction.Rollback();
-                }
-                catch (System.Exception e2)
-                {
-                    MessageBox.Show(e2.Message, this.Text);
-                }
-            }
-            finally
-            {
-                cmd.Dispose();
-                transaction.Dispose();
-                conn.Close();
-            }
-
-        }
-
-        private void buttonAddRow_Click(object sender, EventArgs e)
-        {
-            int i;
-            i = this.dataGridView1.Rows.Add();
-            this.dataGridView1["dbtype", i].Value = "ORACLE";
-            this.dataGridView1["dbms", i].Value = "ODBC";
-            this.dataGridView1["userid", i].Value = "promaster";
-            this.dataGridView1["password", i].Value = "changeoninstall";
-            this.dataGridView1["connectsettings", i].Value = ",DelimitIdentifier='No',DisableBind=1,StaticBind=0,CommitOnDisconnect='No',ConnectOption='SQL_DRIVER_CONNECT,SQL_DRIVER_NOPROMPT',CommitOnDisconnect='No'";
-            this.dataGridView1["auto_emailing", i].Value = "Y";
-            this.dataGridView1["auto_scheduling", i].Value = "Y";
-            this.dataGridView1["timeout_limit", i].Value = "10";
-        }
-
-        private void buttonDeleteRow_Click(object sender, EventArgs e)
-        {
-            if (this.dataGridView1.RowCount > 0)
-            {
-                this.dataGridView1.Rows.RemoveAt(this.dataGridView1.CurrentRow.Index);
-            }
-        }
-
-        private void buttonTestAllConnections_Click(object sender, EventArgs e)
-        {
-            if (this.dataGridView1.RowCount == 0) return;
-            if (validateConnectionData()) return;
-
-            int i;
-            String connectionString, dsn="", userid="", pwd="";
-
-            OdbcConnection conn = new OdbcConnection();
-
-            try
-            {
-				//for (i = 0; i < this.dataGridView1.RowCount; i++)
-				//{
-				//    dsn = this.dataGridView1["dsn", i].Value.ToString();
-				//    userid = this.dataGridView1["userid", i].Value.ToString();
-				//    pwd = this.dataGridView1["password", i].Value.ToString();
-				//    connectionString = "DSN=" + dsn + ";uid=" + userid + ";pwd=" + pwd;
-				//    conn.ConnectionString = connectionString;
-				//    conn.Open();
-				//    conn.Close();
-				//}
-				foreach (DbsRecord item in comboBoxDBList.Items)
-            	{
-					connectionString = "DSN=" + item.Dsn + ";uid=" + item.UserId + ";pwd=" + item.Pwd;
-					conn.ConnectionString = connectionString;
-					conn.Open();
-					conn.Close();
-            	}
-            }
-            catch (System.Exception e1)
-            {
-                MessageBox.Show(e1.Message+"\r\n\r\nDSN="+dsn+"\r\nUserID="+userid+"\r\nPassword="+pwd, this.Text);
-            }
-            finally
-            {
-                conn.Close();
-                this.toolStripStatusLabel1.Text = "All connections successfully connected.";
-            }
-        }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -1071,6 +828,7 @@ namespace Pace
 			textBoxParmPGPPublicKey.Enabled = protect;
 			textBoxParmPGPPassphrase.Enabled = protect;
 			textBoxParmPGPPrivateKey.Enabled = protect;
+			buttonParamAutoExePath.Enabled = protect;
 			buttonParmSave.Enabled = protect;
 		}
 
@@ -1112,6 +870,21 @@ namespace Pace
 			{
 				conn.Close();
 				this.toolStripStatusLabel1.Text = "All connections successfully connected.";
+			}
+		}
+
+		private void buttonParamAutoExePath_Click(object sender, EventArgs e)
+		{
+			if (textBoxParmAutoSchedulerPath.Text.Length > 0)
+			{
+				openFileDialog1.InitialDirectory = textBoxParmAutoSchedulerPath.Text.Substring(1, textBoxParmAutoSchedulerPath.Text.LastIndexOf('\\'));
+				openFileDialog1.FileName = textBoxParmAutoSchedulerPath.Text;
+			}
+			openFileDialog1.Filter = "exe files (*.exe)|*.exe|All files (*.*)|*.*";
+			openFileDialog1.CheckFileExists = true;
+			if (openFileDialog1.ShowDialog() == DialogResult.OK)
+			{
+				textBoxParmAutoSchedulerPath.Text = openFileDialog1.FileName;
 			}
 		}
 

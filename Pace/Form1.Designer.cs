@@ -30,7 +30,6 @@ namespace Pace
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -89,26 +88,6 @@ namespace Pace
 			this.buttonAPLogPath = new System.Windows.Forms.Button();
 			this.textBoxAPLogPath = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
-			this.tabPageConnections = new System.Windows.Forms.TabPage();
-			this.buttonTestAllConnections = new System.Windows.Forms.Button();
-			this.panel1 = new System.Windows.Forms.Panel();
-			this.buttonDeleteRow = new System.Windows.Forms.Button();
-			this.buttonAddRow = new System.Windows.Forms.Button();
-			this.buttonSaveDB = new System.Windows.Forms.Button();
-			this.buttonRetrieve = new System.Windows.Forms.Button();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
-			this.dbtype = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.dbms = new System.Windows.Forms.DataGridViewComboBoxColumn();
-			this.dsn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.userid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dbparm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.connectsettings = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.auto_emailing = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.auto_scheduling = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-			this.timeout_limit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.auto_scheduler_exe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.default_sender = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tabPageDatabases = new System.Windows.Forms.TabPage();
 			this.buttonParmSave = new System.Windows.Forms.Button();
 			this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -163,6 +142,7 @@ namespace Pace
 			this.buttonNewParam = new System.Windows.Forms.Button();
 			this.buttonParamDelete = new System.Windows.Forms.Button();
 			this.buttonTestAll = new System.Windows.Forms.Button();
+			this.buttonParamAutoExePath = new System.Windows.Forms.Button();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPageConfig.SuspendLayout();
@@ -171,9 +151,6 @@ namespace Pace
 			this.groupBox3.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
-			this.tabPageConnections.SuspendLayout();
-			this.panel1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.tabPageDatabases.SuspendLayout();
 			this.groupBox7.SuspendLayout();
 			this.groupBox6.SuspendLayout();
@@ -201,7 +178,6 @@ namespace Pace
 			// tabControl1
 			// 
 			this.tabControl1.Controls.Add(this.tabPageConfig);
-			this.tabControl1.Controls.Add(this.tabPageConnections);
 			this.tabControl1.Controls.Add(this.tabPageDatabases);
 			this.tabControl1.Location = new System.Drawing.Point(2, 12);
 			this.tabControl1.Name = "tabControl1";
@@ -752,196 +728,6 @@ namespace Pace
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Log Path";
 			// 
-			// tabPageConnections
-			// 
-			this.tabPageConnections.BackColor = System.Drawing.SystemColors.Control;
-			this.tabPageConnections.Controls.Add(this.buttonTestAllConnections);
-			this.tabPageConnections.Controls.Add(this.panel1);
-			this.tabPageConnections.Controls.Add(this.buttonSaveDB);
-			this.tabPageConnections.Controls.Add(this.buttonRetrieve);
-			this.tabPageConnections.Controls.Add(this.dataGridView1);
-			this.tabPageConnections.Location = new System.Drawing.Point(4, 22);
-			this.tabPageConnections.Name = "tabPageConnections";
-			this.tabPageConnections.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPageConnections.Size = new System.Drawing.Size(660, 597);
-			this.tabPageConnections.TabIndex = 1;
-			this.tabPageConnections.Text = "Connections";
-			// 
-			// buttonTestAllConnections
-			// 
-			this.buttonTestAllConnections.Location = new System.Drawing.Point(270, 10);
-			this.buttonTestAllConnections.Name = "buttonTestAllConnections";
-			this.buttonTestAllConnections.Size = new System.Drawing.Size(128, 23);
-			this.buttonTestAllConnections.TabIndex = 4;
-			this.buttonTestAllConnections.Text = "Test All Connections";
-			this.buttonTestAllConnections.UseVisualStyleBackColor = true;
-			this.buttonTestAllConnections.Click += new System.EventHandler(this.buttonTestAllConnections_Click);
-			// 
-			// panel1
-			// 
-			this.panel1.Controls.Add(this.buttonDeleteRow);
-			this.panel1.Controls.Add(this.buttonAddRow);
-			this.panel1.Location = new System.Drawing.Point(491, 6);
-			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(169, 33);
-			this.panel1.TabIndex = 3;
-			// 
-			// buttonDeleteRow
-			// 
-			this.buttonDeleteRow.Location = new System.Drawing.Point(87, 5);
-			this.buttonDeleteRow.Name = "buttonDeleteRow";
-			this.buttonDeleteRow.Size = new System.Drawing.Size(75, 23);
-			this.buttonDeleteRow.TabIndex = 1;
-			this.buttonDeleteRow.Text = "Delete";
-			this.buttonDeleteRow.UseVisualStyleBackColor = true;
-			this.buttonDeleteRow.Click += new System.EventHandler(this.buttonDeleteRow_Click);
-			// 
-			// buttonAddRow
-			// 
-			this.buttonAddRow.Location = new System.Drawing.Point(8, 5);
-			this.buttonAddRow.Name = "buttonAddRow";
-			this.buttonAddRow.Size = new System.Drawing.Size(75, 23);
-			this.buttonAddRow.TabIndex = 0;
-			this.buttonAddRow.Text = "Add";
-			this.buttonAddRow.UseVisualStyleBackColor = true;
-			this.buttonAddRow.Click += new System.EventHandler(this.buttonAddRow_Click);
-			// 
-			// buttonSaveDB
-			// 
-			this.buttonSaveDB.Location = new System.Drawing.Point(87, 10);
-			this.buttonSaveDB.Name = "buttonSaveDB";
-			this.buttonSaveDB.Size = new System.Drawing.Size(75, 23);
-			this.buttonSaveDB.TabIndex = 2;
-			this.buttonSaveDB.Text = "Save";
-			this.buttonSaveDB.UseVisualStyleBackColor = true;
-			this.buttonSaveDB.Click += new System.EventHandler(this.buttonSaveDB_Click);
-			// 
-			// buttonRetrieve
-			// 
-			this.buttonRetrieve.Location = new System.Drawing.Point(6, 10);
-			this.buttonRetrieve.Name = "buttonRetrieve";
-			this.buttonRetrieve.Size = new System.Drawing.Size(75, 23);
-			this.buttonRetrieve.TabIndex = 1;
-			this.buttonRetrieve.Text = "Retrieve";
-			this.buttonRetrieve.UseVisualStyleBackColor = true;
-			this.buttonRetrieve.Click += new System.EventHandler(this.buttonRetrieve_Click);
-			// 
-			// dataGridView1
-			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToResizeRows = false;
-			this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-			this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Sunken;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dbtype,
-            this.dbms,
-            this.dsn,
-            this.userid,
-            this.password,
-            this.dbparm,
-            this.connectsettings,
-            this.auto_emailing,
-            this.auto_scheduling,
-            this.timeout_limit,
-            this.auto_scheduler_exe,
-            this.default_sender});
-			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-			this.dataGridView1.Location = new System.Drawing.Point(6, 42);
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.Size = new System.Drawing.Size(648, 483);
-			this.dataGridView1.TabIndex = 0;
-			this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
-			// 
-			// dbtype
-			// 
-			this.dbtype.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-			this.dbtype.HeaderText = "DBType";
-			this.dbtype.Items.AddRange(new object[] {
-            "ORACLE",
-            "SQL SERVER"});
-			this.dbtype.Name = "dbtype";
-			this.dbtype.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.dbtype.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.dbtype.Width = 71;
-			// 
-			// dbms
-			// 
-			this.dbms.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-			this.dbms.HeaderText = "DBMS";
-			this.dbms.Items.AddRange(new object[] {
-            "ODBC"});
-			this.dbms.Name = "dbms";
-			this.dbms.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			this.dbms.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-			this.dbms.Width = 63;
-			// 
-			// dsn
-			// 
-			this.dsn.HeaderText = "ODBC DSN";
-			this.dsn.Name = "dsn";
-			this.dsn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-			// 
-			// userid
-			// 
-			this.userid.HeaderText = "User ID";
-			this.userid.Name = "userid";
-			// 
-			// password
-			// 
-			this.password.HeaderText = "Password";
-			this.password.Name = "password";
-			// 
-			// dbparm
-			// 
-			this.dbparm.HeaderText = "DB Parm";
-			this.dbparm.Name = "dbparm";
-			// 
-			// connectsettings
-			// 
-			this.connectsettings.HeaderText = "Connect Settings";
-			this.connectsettings.Name = "connectsettings";
-			// 
-			// auto_emailing
-			// 
-			this.auto_emailing.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.auto_emailing.FalseValue = "N";
-			this.auto_emailing.HeaderText = "Emailing";
-			this.auto_emailing.Name = "auto_emailing";
-			this.auto_emailing.TrueValue = "Y";
-			this.auto_emailing.Width = 52;
-			// 
-			// auto_scheduling
-			// 
-			this.auto_scheduling.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-			this.auto_scheduling.FalseValue = "N";
-			this.auto_scheduling.HeaderText = "Scheduling";
-			this.auto_scheduling.Name = "auto_scheduling";
-			this.auto_scheduling.TrueValue = "Y";
-			this.auto_scheduling.Width = 66;
-			// 
-			// timeout_limit
-			// 
-			this.timeout_limit.HeaderText = "Timeout";
-			this.timeout_limit.Name = "timeout_limit";
-			// 
-			// auto_scheduler_exe
-			// 
-			this.auto_scheduler_exe.HeaderText = "Scheduler EXE Path";
-			this.auto_scheduler_exe.Name = "auto_scheduler_exe";
-			// 
-			// default_sender
-			// 
-			this.default_sender.HeaderText = "Default Sender";
-			this.default_sender.Name = "default_sender";
-			// 
 			// tabPageDatabases
 			// 
 			this.tabPageDatabases.BackColor = System.Drawing.SystemColors.Control;
@@ -974,6 +760,7 @@ namespace Pace
 			// 
 			// groupBox7
 			// 
+			this.groupBox7.Controls.Add(this.buttonParamAutoExePath);
 			this.groupBox7.Controls.Add(this.textBoxParmTimeout);
 			this.groupBox7.Controls.Add(this.checkBoxParmAutoEmailing);
 			this.groupBox7.Controls.Add(this.textBoxParmDefaultSender);
@@ -1027,7 +814,7 @@ namespace Pace
 			// 
 			this.textBoxParmAutoSchedulerPath.Location = new System.Drawing.Point(123, 49);
 			this.textBoxParmAutoSchedulerPath.Name = "textBoxParmAutoSchedulerPath";
-			this.textBoxParmAutoSchedulerPath.Size = new System.Drawing.Size(491, 20);
+			this.textBoxParmAutoSchedulerPath.Size = new System.Drawing.Size(406, 20);
 			this.textBoxParmAutoSchedulerPath.TabIndex = 25;
 			// 
 			// label30
@@ -1051,7 +838,7 @@ namespace Pace
 			// label32
 			// 
 			this.label32.AutoSize = true;
-			this.label32.Location = new System.Drawing.Point(15, 110);
+			this.label32.Location = new System.Drawing.Point(15, 113);
 			this.label32.Name = "label32";
 			this.label32.Size = new System.Drawing.Size(69, 13);
 			this.label32.TabIndex = 17;
@@ -1427,6 +1214,16 @@ namespace Pace
 			this.buttonTestAll.UseVisualStyleBackColor = true;
 			this.buttonTestAll.Click += new System.EventHandler(this.buttonTestAll_Click);
 			// 
+			// buttonParamAutoExePath
+			// 
+			this.buttonParamAutoExePath.Location = new System.Drawing.Point(538, 46);
+			this.buttonParamAutoExePath.Name = "buttonParamAutoExePath";
+			this.buttonParamAutoExePath.Size = new System.Drawing.Size(75, 23);
+			this.buttonParamAutoExePath.TabIndex = 28;
+			this.buttonParamAutoExePath.Text = "Browse...";
+			this.buttonParamAutoExePath.UseVisualStyleBackColor = true;
+			this.buttonParamAutoExePath.Click += new System.EventHandler(this.buttonParamAutoExePath_Click);
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1458,9 +1255,6 @@ namespace Pace
 			this.groupBox2.PerformLayout();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			this.tabPageConnections.ResumeLayout(false);
-			this.panel1.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.tabPageDatabases.ResumeLayout(false);
 			this.tabPageDatabases.PerformLayout();
 			this.groupBox7.ResumeLayout(false);
@@ -1480,8 +1274,7 @@ namespace Pace
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPageConfig;
-        private System.Windows.Forms.TabPage tabPageConnections;
+		private System.Windows.Forms.TabPage tabPageConfig;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1517,34 +1310,15 @@ namespace Pace
         private System.Windows.Forms.Button buttonAMProgPath;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonSaveRegistry;
-        private System.Windows.Forms.Button buttonTestConnection;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button buttonRetrieve;
-        private System.Windows.Forms.Button buttonSaveDB;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button buttonDeleteRow;
-        private System.Windows.Forms.Button buttonAddRow;
-        private System.Windows.Forms.Button buttonTestAllConnections;
+		private System.Windows.Forms.Button buttonTestConnection;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label labelServiceStatus;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonRefresh;
-        private System.Windows.Forms.ComboBox comboBoxDSN;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dbtype;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dbms;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dsn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn userid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn password;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dbparm;
-        private System.Windows.Forms.DataGridViewTextBoxColumn connectsettings;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn auto_emailing;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn auto_scheduling;
-        private System.Windows.Forms.DataGridViewTextBoxColumn timeout_limit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn auto_scheduler_exe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn default_sender;
+		private System.Windows.Forms.ComboBox comboBoxDSN;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
@@ -1609,6 +1383,7 @@ namespace Pace
 		private System.Windows.Forms.Button buttonNewParam;
 		private System.Windows.Forms.Button buttonParamDelete;
 		private System.Windows.Forms.Button buttonTestAll;
+		private System.Windows.Forms.Button buttonParamAutoExePath;
     }
 }
 
