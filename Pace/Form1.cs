@@ -102,34 +102,11 @@ namespace Pace
                     case "email_html":
                         this.checkBoxHTMLEmail.Checked = (rk.GetValue(s_keyname).ToString() == "Y");
                         break;
+					case "max_import_files":
+						this.textBoxMaxImportFilesLimit.Text = rk.GetValue(s_keyname).ToString();
+						break;
                 }
             }
-
-
-            //textBoxAPLogPath.Text = rk.GetValue("Admin_log").ToString();
-            //this.comboBoxDBType.Text = rk.GetValue("Admin_dbtype").ToString();
-            //s_odbc_dsn = rk.GetValue("Admin_dsn").ToString();
-            //this.textBoxConnectSettings.Text = rk.GetValue("Admin_connectsettings").ToString();
-            //this.textBoxDBParm.Text = rk.GetValue("Admin_dbparm").ToString();
-            //this.textBoxUserID.Text = rk.GetValue("Admin_userid").ToString();
-            //this.textBoxPassword.Text = rk.GetValue("Admin_pwd").ToString();
-            //this.textBoxIdleTime.Text = rk.GetValue("Idle_time").ToString();
-
-            //this.textBoxASProgramPath.Text = rk.GetValue("Auto_scheduler_exe").ToString();
-            //this.textBoxASLogPath.Text = rk.GetValue("Auto_scheduler_log").ToString();
-            //this.checkBoxRunAutoSched.Checked = (rk.GetValue("Auto_scheduler_flag").ToString() == "Y");
-
-            //this.textBoxAMProgramPath.Text = rk.GetValue("Auto_emailer_exe").ToString();
-            //this.textBoxAMLogPath.Text = rk.GetValue("Auto_emailer_log").ToString();
-            //this.checkBoxRunAutoEmailer.Checked = (rk.GetValue("Auto_emailer_flag").ToString() == "Y");
-
-            //if (rk.SubKeyCount > 14)
-            //{
-            //    this.textBoxDefaultSender.Text = rk.GetValue("email_default_sender").ToString();
-            //    this.textBoxSMTPServer.Text = rk.GetValue("email_smtp").ToString();
-            //    this.textBoxSMTPPort.Text = rk.GetValue("email_port").ToString();
-            //    this.checkBoxHTMLEmail.Checked = (rk.GetValue("email_html").ToString() == "Y");
-            //}
 
         	PopulateOdbcDsn(ref comboBoxDSN);
 
@@ -317,6 +294,10 @@ namespace Pace
                         case "auto_scheduler_flag":
                             rk.SetValue(s_keyname, s_auto_scheduler_flag);
                             break;
+
+						case "max_import_files":
+							rk.SetValue(s_keyname, textBoxMaxImportFilesLimit.Text);
+							break;
 
                         case "auto_emailer_exe":
                             rk.SetValue(s_keyname, textBoxAMProgramPath.Text.ToString());

@@ -89,8 +89,12 @@ namespace Pace
 			this.textBoxAPLogPath = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPageDatabases = new System.Windows.Forms.TabPage();
+			this.buttonTestAll = new System.Windows.Forms.Button();
+			this.buttonParamDelete = new System.Windows.Forms.Button();
+			this.buttonNewParam = new System.Windows.Forms.Button();
 			this.buttonParmSave = new System.Windows.Forms.Button();
 			this.groupBox7 = new System.Windows.Forms.GroupBox();
+			this.buttonParamAutoExePath = new System.Windows.Forms.Button();
 			this.textBoxParmTimeout = new System.Windows.Forms.TextBox();
 			this.checkBoxParmAutoEmailing = new System.Windows.Forms.CheckBox();
 			this.textBoxParmDefaultSender = new System.Windows.Forms.TextBox();
@@ -139,10 +143,8 @@ namespace Pace
 			this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
 			this.toolStripMenuItemExit = new System.Windows.Forms.ToolStripMenuItem();
-			this.buttonNewParam = new System.Windows.Forms.Button();
-			this.buttonParamDelete = new System.Windows.Forms.Button();
-			this.buttonTestAll = new System.Windows.Forms.Button();
-			this.buttonParamAutoExePath = new System.Windows.Forms.Button();
+			this.label28 = new System.Windows.Forms.Label();
+			this.textBoxMaxImportFilesLimit = new System.Windows.Forms.TextBox();
 			this.statusStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPageConfig.SuspendLayout();
@@ -209,7 +211,7 @@ namespace Pace
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(60, 13);
 			this.labelVersion.TabIndex = 6;
-			this.labelVersion.Text = "Version 1.6";
+			this.labelVersion.Text = "Version 1.7";
 			// 
 			// groupBox4
 			// 
@@ -451,6 +453,8 @@ namespace Pace
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.textBoxMaxImportFilesLimit);
+			this.groupBox2.Controls.Add(this.label28);
 			this.groupBox2.Controls.Add(this.buttonASLogPath);
 			this.groupBox2.Controls.Add(this.buttonASProgPath);
 			this.groupBox2.Controls.Add(this.textBoxASLogPath);
@@ -748,6 +752,36 @@ namespace Pace
 			this.tabPageDatabases.Text = "Databases";
 			this.tabPageDatabases.Enter += new System.EventHandler(this.tabPageDatabases_Enter);
 			// 
+			// buttonTestAll
+			// 
+			this.buttonTestAll.Location = new System.Drawing.Point(282, 568);
+			this.buttonTestAll.Name = "buttonTestAll";
+			this.buttonTestAll.Size = new System.Drawing.Size(122, 23);
+			this.buttonTestAll.TabIndex = 26;
+			this.buttonTestAll.Text = "Test All Connections";
+			this.buttonTestAll.UseVisualStyleBackColor = true;
+			this.buttonTestAll.Click += new System.EventHandler(this.buttonTestAll_Click);
+			// 
+			// buttonParamDelete
+			// 
+			this.buttonParamDelete.Location = new System.Drawing.Point(101, 568);
+			this.buttonParamDelete.Name = "buttonParamDelete";
+			this.buttonParamDelete.Size = new System.Drawing.Size(75, 23);
+			this.buttonParamDelete.TabIndex = 25;
+			this.buttonParamDelete.Text = "Delete";
+			this.buttonParamDelete.UseVisualStyleBackColor = true;
+			this.buttonParamDelete.Click += new System.EventHandler(this.buttonParamDelete_Click);
+			// 
+			// buttonNewParam
+			// 
+			this.buttonNewParam.Location = new System.Drawing.Point(14, 568);
+			this.buttonNewParam.Name = "buttonNewParam";
+			this.buttonNewParam.Size = new System.Drawing.Size(75, 23);
+			this.buttonNewParam.TabIndex = 24;
+			this.buttonNewParam.Text = "New";
+			this.buttonNewParam.UseVisualStyleBackColor = true;
+			this.buttonNewParam.Click += new System.EventHandler(this.buttonNewParam_Click);
+			// 
 			// buttonParmSave
 			// 
 			this.buttonParmSave.Location = new System.Drawing.Point(571, 568);
@@ -775,6 +809,16 @@ namespace Pace
 			this.groupBox7.TabIndex = 22;
 			this.groupBox7.TabStop = false;
 			this.groupBox7.Text = "AutoProcessing Properties";
+			// 
+			// buttonParamAutoExePath
+			// 
+			this.buttonParamAutoExePath.Location = new System.Drawing.Point(538, 46);
+			this.buttonParamAutoExePath.Name = "buttonParamAutoExePath";
+			this.buttonParamAutoExePath.Size = new System.Drawing.Size(75, 23);
+			this.buttonParamAutoExePath.TabIndex = 28;
+			this.buttonParamAutoExePath.Text = "Browse...";
+			this.buttonParamAutoExePath.UseVisualStyleBackColor = true;
+			this.buttonParamAutoExePath.Click += new System.EventHandler(this.buttonParamAutoExePath_Click);
 			// 
 			// textBoxParmTimeout
 			// 
@@ -1184,45 +1228,21 @@ namespace Pace
 			this.toolStripMenuItemExit.Text = "Exit Pace";
 			this.toolStripMenuItemExit.Click += new System.EventHandler(this.toolStripMenuItemExit_Click);
 			// 
-			// buttonNewParam
+			// label28
 			// 
-			this.buttonNewParam.Location = new System.Drawing.Point(14, 568);
-			this.buttonNewParam.Name = "buttonNewParam";
-			this.buttonNewParam.Size = new System.Drawing.Size(75, 23);
-			this.buttonNewParam.TabIndex = 24;
-			this.buttonNewParam.Text = "New";
-			this.buttonNewParam.UseVisualStyleBackColor = true;
-			this.buttonNewParam.Click += new System.EventHandler(this.buttonNewParam_Click);
+			this.label28.AutoSize = true;
+			this.label28.Location = new System.Drawing.Point(225, 90);
+			this.label28.Name = "label28";
+			this.label28.Size = new System.Drawing.Size(107, 13);
+			this.label28.TabIndex = 8;
+			this.label28.Text = "Max Import Files Limit";
 			// 
-			// buttonParamDelete
+			// textBoxMaxImportFilesLimit
 			// 
-			this.buttonParamDelete.Location = new System.Drawing.Point(101, 568);
-			this.buttonParamDelete.Name = "buttonParamDelete";
-			this.buttonParamDelete.Size = new System.Drawing.Size(75, 23);
-			this.buttonParamDelete.TabIndex = 25;
-			this.buttonParamDelete.Text = "Delete";
-			this.buttonParamDelete.UseVisualStyleBackColor = true;
-			this.buttonParamDelete.Click += new System.EventHandler(this.buttonParamDelete_Click);
-			// 
-			// buttonTestAll
-			// 
-			this.buttonTestAll.Location = new System.Drawing.Point(282, 568);
-			this.buttonTestAll.Name = "buttonTestAll";
-			this.buttonTestAll.Size = new System.Drawing.Size(122, 23);
-			this.buttonTestAll.TabIndex = 26;
-			this.buttonTestAll.Text = "Test All Connections";
-			this.buttonTestAll.UseVisualStyleBackColor = true;
-			this.buttonTestAll.Click += new System.EventHandler(this.buttonTestAll_Click);
-			// 
-			// buttonParamAutoExePath
-			// 
-			this.buttonParamAutoExePath.Location = new System.Drawing.Point(538, 46);
-			this.buttonParamAutoExePath.Name = "buttonParamAutoExePath";
-			this.buttonParamAutoExePath.Size = new System.Drawing.Size(75, 23);
-			this.buttonParamAutoExePath.TabIndex = 28;
-			this.buttonParamAutoExePath.Text = "Browse...";
-			this.buttonParamAutoExePath.UseVisualStyleBackColor = true;
-			this.buttonParamAutoExePath.Click += new System.EventHandler(this.buttonParamAutoExePath_Click);
+			this.textBoxMaxImportFilesLimit.Location = new System.Drawing.Point(346, 86);
+			this.textBoxMaxImportFilesLimit.Name = "textBoxMaxImportFilesLimit";
+			this.textBoxMaxImportFilesLimit.Size = new System.Drawing.Size(100, 20);
+			this.textBoxMaxImportFilesLimit.TabIndex = 9;
 			// 
 			// Form1
 			// 
@@ -1384,6 +1404,8 @@ namespace Pace
 		private System.Windows.Forms.Button buttonParamDelete;
 		private System.Windows.Forms.Button buttonTestAll;
 		private System.Windows.Forms.Button buttonParamAutoExePath;
+		private System.Windows.Forms.TextBox textBoxMaxImportFilesLimit;
+		private System.Windows.Forms.Label label28;
     }
 }
 
