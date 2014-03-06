@@ -829,6 +829,7 @@ namespace Pace
 
 		private void buttonTestAll_Click(object sender, EventArgs e)
 		{
+		    buttonParmSave.PerformClick();
 
 			var connectionString= "";
 			var conn = new OdbcConnection();
@@ -837,7 +838,11 @@ namespace Pace
 			{
 				foreach (DbsRecord item in comboBoxDBList.Items)
 				{
-					connectionString = "DSN=" + item.Dsn + ";uid=" + item.UserId + ";pwd=" + item.Pwd;
+                    if (item.Dbms.Equals("DB"))
+                        connectionString = "Driver=SQL Server;Server=" + item.ServerName + ";Database=" + item.DbName+";";
+                    else
+                        connectionString = "DSN=" + item.Dsn + ";uid=" + item.UserId + ";pwd=" + item.Pwd + ";";
+
 					conn.ConnectionString = connectionString;
 					conn.Open();
 					conn.Close();
